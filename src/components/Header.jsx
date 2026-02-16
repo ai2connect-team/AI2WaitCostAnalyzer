@@ -23,7 +23,7 @@ export default function Header() {
                         </div>
                         <div>
                             <h1 className="text-base font-bold text-white leading-tight">
-                                AI2 <span className="text-cyan-200">WaitCostAnalyzer</span>
+                                AI2WaitCostAnalyzer
                             </h1>
                             <p className="text-[10px] text-blue-200 uppercase tracking-wider font-medium">
                                 {t('header.subtitle')}

@@ -29,11 +29,11 @@ export default function App() {
 
       {/* Calculator Section */}
       <main id="calculator" className="flex-1 py-12 sm:py-16 lg:py-20">
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
+        <div className="w-full max-w-[90rem] mx-auto px-4 sm:px-6 md:px-6 lg:px-8 xl:px-10">
           {/* Two-column layout — stacks on mobile, side-by-side on desktop */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-start">
             {/* Left: Calculator form */}
-            <div className="animate-slide-in-left">
+            <div className="animate-slide-in-left relative z-20">
               <Calculator values={values} onValueChange={handleValueChange} />
             </div>
 

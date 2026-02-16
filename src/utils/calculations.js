@@ -6,8 +6,8 @@
  * - VBGL §5: Reasonable free waiting time is ~2 hours (120 minutes) per stop
  *
  * Calculation logic:
- * - Total stops/month = trucks × tours/day × stops/tour × working days
- * - Total waiting hours/month = total stops × avg wait time (in hours)
+ * - Total stops / month = trucks × tours / day × stops / tour × working days
+ * - Total waiting hours / month = total stops × avg wait time (in hours)
  * - Cost of lost time = total waiting hours × demurrage rate
  * - Claimable demurrage: only waiting time beyond 120 min threshold
  */

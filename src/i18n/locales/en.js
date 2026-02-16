@@ -48,7 +48,7 @@ const en = {
                 demurrageRate: {
                     label: 'Demurrage rate',
                     tooltip: 'Your demurrage rate per hour (industry standard: €40–60)',
-                    unit: '€/hour',
+                    unit: '€ / hour',
                 },
                 workingDays: {
                     label: 'Working days per month',
@@ -78,7 +78,7 @@ const en = {
                 waitingHours: {
                     label: 'Total waiting hours / month',
                     description: 'Based on {{stops}} stops per month',
-                    unit: 'hrs',
+                    unit: 'h',
                 },
                 lostTimeCost: {
                     label: 'Cost of lost time / month',
@@ -86,7 +86,7 @@ const en = {
                 },
                 claimable: {
                     label: 'Claimable as demurrage / month',
-                    descriptionPositive: '{{hours}} hrs beyond the 2-hour threshold',
+                    descriptionPositive: '{{hours}} h beyond the 2-hour threshold',
                     descriptionZero: 'The avg. waiting time is below the 2-hour threshold',
                 },
                 annualLoss: {
@@ -117,15 +117,15 @@ const en = {
             subtitle: 'Demurrage Analysis Report',
             createdOn: 'Created on: {{date}}',
             inputTitle: 'Input Parameters',
-            parameterHeader: 'Parameter',
+            parameterHeader: 'Route organization',
             valueHeader: 'Value',
             minutesUnit: 'Minutes',
-            perHourUnit: '/hour',
+            perHourUnit: ' / hour',
             resultsTitle: 'Results',
-            metricHeader: 'Metric',
+            metricHeader: 'Operational impact',
             totalStops: 'Total stops per month',
             totalWaitHours: 'Total waiting hours per month',
-            hoursUnit: 'hrs',
+            hoursUnit: 'h',
             monthlyCost: 'Cost of lost time (monthly)',
             monthlyClaimable: 'Claimable as demurrage (monthly)',
             annualCost: 'Cost of lost time (annual)',

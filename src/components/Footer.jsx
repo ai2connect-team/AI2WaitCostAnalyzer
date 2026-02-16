@@ -14,7 +14,7 @@ export default function Footer() {
                     {/* Brand */}
                     <div>
                         <h3 className="text-sm font-bold text-surface-800 mb-3">
-                            AI2 <span className="text-primary-600">WaitCost Analyzer</span>
+                            AI2WaitCostAnalyzer
                         </h3>
                         <p className="text-xs text-surface-500 leading-relaxed max-w-sm">
                             {t('footer.description')}

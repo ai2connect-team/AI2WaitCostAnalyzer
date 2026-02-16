@@ -28,7 +28,7 @@ export default function InputField({
                 {tooltip && (
                     <span className="relative group/tip shrink-0">
                         <Info size={14} className="text-surface-400 cursor-help" />
-                        <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 text-xs text-white bg-surface-800 rounded-lg shadow-xl opacity-0 group-hover/tip:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">
+                        <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 text-xs text-white bg-surface-800 rounded-lg shadow-xl opacity-0 group-hover/tip:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
                             {tooltip}
                         </span>
                     </span>
