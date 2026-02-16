@@ -63,6 +63,17 @@ const de = {
             title: 'Ihre Analyse',
             subtitle: 'Echtzeit-Berechnung basierend auf Ihren Eingaben',
             downloadPdf: 'PDF herunterladen',
+            form: {
+                nameLabel: 'Ihr Name',
+                namePlaceholder: 'Max Mustermann',
+                emailLabel: 'Ihre E-Mail-Adresse',
+                emailPlaceholder: 'name@firma.de',
+                submitButton: 'Analyse per E-Mail erhalten',
+                submitting: 'Wird gesendet…',
+                successMessage: 'Ihre Analyse wurde erfolgreich an Ihre E-Mail gesendet!',
+                errorMessage: 'Fehler beim Senden. Bitte versuchen Sie es erneut.',
+                emailNote: 'Wir senden Ihnen die vollständige Analyse als PDF an Ihre E-Mail-Adresse.',
+            },
             cards: {
                 waitingHours: {
                     label: 'Gesamtwartestunden / Monat',

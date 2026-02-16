@@ -63,6 +63,17 @@ const en = {
             title: 'Your Analysis',
             subtitle: 'Real-time calculation based on your input',
             downloadPdf: 'Download PDF',
+            form: {
+                nameLabel: 'Your Name',
+                namePlaceholder: 'John Doe',
+                emailLabel: 'Your Email Address',
+                emailPlaceholder: 'name@company.com',
+                submitButton: 'Get Analysis via Email',
+                submitting: 'Sending…',
+                successMessage: 'Your analysis has been sent to your email!',
+                errorMessage: 'Failed to send. Please try again.',
+                emailNote: 'We will send the full analysis as a PDF to your email address.',
+            },
             cards: {
                 waitingHours: {
                     label: 'Total waiting hours / month',

@@ -1,24 +1,69 @@
+import { useState } from 'react';
 import {
     Clock,
     TrendingDown,
     Scale,
     CalendarRange,
-    Download,
+    Mail,
+    User,
+    Send,
+    CheckCircle2,
+    AlertCircle,
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import ResultCard from './ui/ResultCard';
 import Button from './ui/Button';
 import { formatCurrency, formatNumber } from '../utils/calculations';
-import { generatePDF } from '../utils/pdfExport';
 
 /**
  * Results display — light theme with i18n.
+ * Includes an email form to send the PDF report to the user.
  */
 export default function Results({ results, inputs }) {
     const { t } = useTranslation();
 
-    const handleDownloadPDF = () => {
-        generatePDF(inputs, results, t);
+    // ── Form state ─────────────────────────────────────────────────
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [success, setSuccess] = useState(false);
+    const [error, setError] = useState('');
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setError('');
+        setSuccess(false);
+
+        try {
+            const res = await fetch('/api/submit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name,
+                    email,
+                    calculator_inputs: inputs,
+                    calculator_results: results,
+                }),
+            });
+
+            if (!res.ok) {
+                throw new Error(`HTTP ${res.status}`);
+            }
+
+            const data = await res.json();
+            if (data.success) {
+                setSuccess(true);
+                setName('');
+                setEmail('');
+            } else {
+                setError(data.message || t('results.form.errorMessage'));
+            }
+        } catch {
+            setError(t('results.form.errorMessage'));
+        } finally {
+            setLoading(false);
+        }
     };
 
     const cards = [
@@ -65,27 +110,97 @@ export default function Results({ results, inputs }) {
         },
     ];
 
+    // ── Email Form ─────────────────────────────────────────────────
+    const emailForm = (
+        <form onSubmit={handleSubmit} className="card p-5 sm:p-6 border-primary-200 bg-primary-50/30 opacity-0 animate-fade-in-up animation-delay-400">
+            <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 rounded-lg bg-primary-100">
+                    <Mail size={20} className="text-primary-600" />
+                </div>
+                <div>
+                    <h3 className="text-sm font-semibold text-surface-800">
+                        {t('results.form.submitButton')}
+                    </h3>
+                    <p className="text-xs text-surface-500">
+                        {t('results.form.emailNote')}
+                    </p>
+                </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+                {/* Name field */}
+                <div className="relative">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-surface-400">
+                        <User size={16} />
+                    </span>
+                    <input
+                        type="text"
+                        required
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder={t('results.form.namePlaceholder')}
+                        className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white border border-surface-200 text-surface-800 text-sm font-medium outline-none placeholder:text-surface-400 focus:border-primary-500 transition-colors"
+                    />
+                </div>
+
+                {/* Email field */}
+                <div className="relative">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-surface-400">
+                        <Mail size={16} />
+                    </span>
+                    <input
+                        type="email"
+                        required
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder={t('results.form.emailPlaceholder')}
+                        className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white border border-surface-200 text-surface-800 text-sm font-medium outline-none placeholder:text-surface-400 focus:border-primary-500 transition-colors"
+                    />
+                </div>
+            </div>
+
+            {/* Submit button */}
+            <Button
+                type="submit"
+                variant="primary"
+                size="md"
+                loading={loading}
+                icon={<Send size={16} />}
+                className="w-full"
+            >
+                {loading ? t('results.form.submitting') : t('results.form.submitButton')}
+            </Button>
+
+            {/* Success message */}
+            {success && (
+                <div className="flex items-center gap-2 mt-3 p-3 rounded-xl bg-success-50 border border-success-200 animate-fade-in-up">
+                    <CheckCircle2 size={18} className="text-success-600 shrink-0" />
+                    <p className="text-sm font-medium text-success-700">
+                        {t('results.form.successMessage')}
+                    </p>
+                </div>
+            )}
+
+            {/* Error message */}
+            {error && (
+                <div className="flex items-center gap-2 mt-3 p-3 rounded-xl bg-red-50 border border-red-200 animate-fade-in-up">
+                    <AlertCircle size={18} className="text-red-600 shrink-0" />
+                    <p className="text-sm font-medium text-red-700">{error}</p>
+                </div>
+            )}
+        </form>
+    );
+
     return (
         <div className="space-y-5">
             {/* Section header */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                <div>
-                    <h2 className="text-xl sm:text-2xl font-bold text-surface-800 mb-1">
-                        {t('results.title')}
-                    </h2>
-                    <p className="text-sm sm:text-base text-surface-500">
-                        {t('results.subtitle')}
-                    </p>
-                </div>
-                <Button
-                    variant="primary"
-                    size="md"
-                    icon={<Download size={16} />}
-                    onClick={handleDownloadPDF}
-                    className="hidden sm:inline-flex shrink-0"
-                >
-                    {t('results.downloadPdf')}
-                </Button>
+            <div>
+                <h2 className="text-xl sm:text-2xl font-bold text-surface-800 mb-1">
+                    {t('results.title')}
+                </h2>
+                <p className="text-sm sm:text-base text-surface-500">
+                    {t('results.subtitle')}
+                </p>
             </div>
 
             {/* Result cards — 2x2 grid */}
@@ -125,18 +240,8 @@ export default function Results({ results, inputs }) {
                 </div>
             )}
 
-            {/* Mobile PDF button */}
-            <div className="sm:hidden">
-                <Button
-                    variant="primary"
-                    size="lg"
-                    icon={<Download size={18} />}
-                    onClick={handleDownloadPDF}
-                    className="w-full"
-                >
-                    {t('results.downloadPdf')}
-                </Button>
-            </div>
+            {/* Email form — replaces the old download button */}
+            {emailForm}
         </div>
     );
 }
