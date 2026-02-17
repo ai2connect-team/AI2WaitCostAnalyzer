@@ -10,7 +10,7 @@ import {
     CheckCircle2,
     AlertCircle,
 } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
+import { useTranslation, Trans } from 'react-i18next';
 import ResultCard from './ui/ResultCard';
 import Button from './ui/Button';
 import { formatCurrency, formatNumber } from '../utils/calculations';
@@ -28,6 +28,7 @@ export default function Results({ results, inputs }) {
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState('');
+    const [consent, setConsent] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -158,6 +159,32 @@ export default function Results({ results, inputs }) {
                     />
                 </div>
             </div>
+
+            {/* GDPR consent checkbox */}
+            <label className="flex items-start gap-3 mb-4 cursor-pointer group">
+                <input
+                    type="checkbox"
+                    required
+                    checked={consent}
+                    onChange={(e) => setConsent(e.target.checked)}
+                    className="mt-0.5 h-4 w-4 rounded border-surface-300 text-primary-600 focus:ring-primary-500 cursor-pointer shrink-0"
+                />
+                <span className="text-xs text-surface-500 leading-relaxed">
+                    <Trans
+                        i18nKey="results.form.gdprConsent"
+                        components={{
+                            privacyLink: (
+                                <a
+                                    href="https://ai2connect-do.com/privacy"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-primary-600 underline hover:text-primary-700"
+                                />
+                            ),
+                        }}
+                    />
+                </span>
+            </label>
 
             {/* Submit button */}
             <Button

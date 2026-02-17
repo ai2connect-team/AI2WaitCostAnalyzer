@@ -73,6 +73,8 @@ const en = {
                 successMessage: 'Your analysis has been sent to your email!',
                 errorMessage: 'Failed to send. Please try again.',
                 emailNote: 'We will send the full analysis as a PDF to your email address.',
+                gdprConsent: 'I consent to the processing of my data (name, email) for the purpose of receiving the analysis. More info in our <privacyLink>Privacy Policy</privacyLink>.',
+                gdprRequired: 'Please agree to the privacy policy.',
             },
             cards: {
                 waitingHours: {

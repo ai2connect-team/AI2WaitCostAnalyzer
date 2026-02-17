@@ -73,6 +73,8 @@ const de = {
                 successMessage: 'Ihre Analyse wurde erfolgreich an Ihre E-Mail gesendet!',
                 errorMessage: 'Fehler beim Senden. Bitte versuchen Sie es erneut.',
                 emailNote: 'Wir senden Ihnen die vollständige Analyse als PDF an Ihre E-Mail-Adresse.',
+                gdprConsent: 'Ich stimme der Verarbeitung meiner Daten (Name, E-Mail) zum Zweck der Zusendung der Analyse zu. Weitere Infos in unserer <privacyLink>Datenschutzerklärung</privacyLink>.',
+                gdprRequired: 'Bitte stimmen Sie der Datenschutzerklärung zu.',
             },
             cards: {
                 waitingHours: {
