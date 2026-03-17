@@ -144,6 +144,87 @@ const en = {
             page: 'Page {{current}} of {{total}}',
             filename: 'Demurrage-Analysis',
         },
+        // Chemical Logistics Adaptation
+        chemical: {
+            hero: {
+                headline: 'How much does your Chemical Terminal <highlight>lose every month</highlight> due to truck waiting times?',
+                subheadline: 'Trucks wait an average of 45–90 minutes at chemical terminals. Every blocked dock costs production time, increases ADR compliance risks, and ties up critical resources. Calculate your real costs — in under 2 minutes.',
+            },
+            calculator: {
+                title: 'Enter your terminal data',
+                subtitle: 'Adjust the values to your terminal — the results update instantly.',
+                legalNoteHeader: 'ADR / GGVSEB Regulation:',
+                legalNote: 'Dangerous goods vehicles (ADR) may not be unloaded simultaneously at adjacent docks. Any unplanned ADR delay triggers documentation requirements and increases liability risk. Waiting costs in chemical logistics are 3–5× higher than in standard logistics.',
+                fields: {
+                    trucks: {
+                        label: 'Truck arrivals per day',
+                        tooltip: 'Average number of trucks arriving daily',
+                        unit: 'Trucks/Day',
+                    },
+                    toursPerDay: {
+                        label: 'Number of docks / gates',
+                        tooltip: 'Available capacity at loading and unloading stations',
+                        unit: 'Docks',
+                    },
+                    stopsPerTour: {
+                        label: 'ADR vehicles per day (Dangerous Goods)',
+                        tooltip: 'Number of vehicles with dangerous goods labels',
+                        unit: 'ADR Vehicles',
+                    },
+                    avgWaitMinutes: {
+                        label: 'Avg. wait per truck',
+                        tooltip: 'Average waiting time per truck at the terminal',
+                        unit: 'Minutes',
+                    },
+                    demurrageRate: {
+                        label: 'Production loss cost',
+                        tooltip: 'Cost per hour for downtime or delays (Industry standard: >€500)',
+                        unit: '€ / hour',
+                    },
+                    workingDays: {
+                        label: 'Working days per month',
+                        tooltip: 'Average working days per month at the terminal',
+                        unit: 'Days',
+                    },
+                },
+            },
+            results: {
+                title: 'Your Terminal Cost Analysis',
+                cards: {
+                    waitingHours: {
+                        label: 'Total waiting hours / month',
+                        description: 'Based on {{stops}} truck visits per month',
+                        unit: 'h',
+                    },
+                    lostTimeCost: {
+                        label: 'Production loss / month',
+                    },
+                    claimable: {
+                        label: 'ADR Compliance Risk Exposure / month',
+                        descriptionPositive: 'Unplanned ADR delays increase incident risk and documentation effort',
+                        descriptionZero: 'Currently no elevated risk exposure from ADR waiting times',
+                    },
+                    annualLoss: {
+                        label: 'Estimated annual production loss',
+                        description: 'Of which ADR-risk induced: {{amount}} / year',
+                    },
+                },
+                form: {
+                    submitButton: 'Get Chemical Terminal Analysis via Email',
+                    emailNote: 'We will send you the complete analysis as a PDF — including ADR risk exposure and optimization potential.',
+                },
+            },
+            footer: {
+                description: 'Calculate your monthly losses due to truck waiting times at chemical terminals — and discover how AI-supported dock scheduling reduces ADR risks, prevents production stops, and saves up to 30% in terminal costs.',
+                legalText: 'This calculation serves only as a guide and does not constitute legal or compliance advice. For binding ADR/GGVSEB assessments, please consult a certified dangerous goods safety advisor.',
+            },
+            pdf: {
+                filename: 'Chemical-Terminal-Analysis',
+                parameterHeader: 'Terminal Configuration',
+                annualClaimable: 'ADR Risk Exposure (annual)',
+                legalTitle: 'Compliance Basis',
+            }
+        },
     },
 };
 
