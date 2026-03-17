@@ -3,8 +3,9 @@ import { useTranslation } from 'react-i18next';
 /**
  * Footer — light theme with i18n.
  */
-export default function Footer() {
+export default function Footer({ variant = 'freight' }) {
     const { t } = useTranslation();
+    const prefix = variant === 'chemical' ? 'chemical.' : '';
     const currentYear = new Date().getFullYear();
 
     return (
@@ -17,7 +18,7 @@ export default function Footer() {
                             AI2WaitCostAnalyzer
                         </h3>
                         <p className="text-xs text-surface-500 leading-relaxed max-w-sm">
-                            {t('footer.description')}
+                            {t(`${prefix}footer.description`)}
                         </p>
                     </div>
 
@@ -27,7 +28,7 @@ export default function Footer() {
                             {t('footer.legalTitle')}
                         </h4>
                         <p className="text-xs text-surface-400 leading-relaxed">
-                            {t('footer.legalText')}
+                            {t(`${prefix}footer.legalText`)}
                         </p>
                     </div>
                 </div>

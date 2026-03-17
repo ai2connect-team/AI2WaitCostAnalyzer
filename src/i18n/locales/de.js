@@ -15,7 +15,7 @@ const de = {
             badgeCalculator: 'Kostenloser Rechner',
             headline: 'Wie viel Geld verliert Ihre Flotte <highlight>jeden Monat</highlight> durch Wartezeiten?',
             subheadline:
-                'LKW warten durchschnittlich 25–45 Minuten an Laderampen. Nach §412 HGB steht Ihnen Standgeld zu — berechnen Sie jetzt Ihren Anspruch.',
+                'LKW warten durchschnittlich 45–90 Minuten an Laderampen. Nach §412 HGB steht Ihnen Standgeld zu — berechnen Sie jetzt Ihren Anspruch.',
         },
 
         // Calculator
@@ -143,6 +143,87 @@ const de = {
             ],
             page: 'Seite {{current}} von {{total}}',
             filename: 'Standgeld-Analyse',
+        },
+        // Chemical Logistics Adaptation
+        chemical: {
+            hero: {
+                headline: 'Wie viel kostet Ihr Chemie-Terminal <highlight>jeden Monat</highlight> durch LKW-Wartezeiten?',
+                subheadline: 'LKW warten an Chemie-Terminals durchschnittlich 45–90 Minuten. Jede blockierte Rampe kostet Produktionszeit, erhöht das ADR-Compliance-Risiko und bindet kritische Ressourcen. Berechnen Sie Ihre realen Kosten — in unter 2 Minuten.',
+            },
+            calculator: {
+                title: 'Ihre Terminaldaten eingeben',
+                subtitle: 'Passen Sie die Werte an Ihr Terminal an — die Ergebnisse aktualisieren sich sofort.',
+                legalNoteHeader: 'ADR / GGVSEB-Regelung:',
+                legalNote: 'Gefahrgutfahrzeuge (ADR) dürfen nicht gleichzeitig an benachbarten Rampen entladen werden. Jede ungeplante ADR-Verzögerung löst eine Dokumentationspflicht aus und erhöht das Haftungsrisiko. Wartekosten in der Chemielogistik sind 3–5× höher als in der Standardlogistik.',
+                fields: {
+                    trucks: {
+                        label: 'LKW-Ankünfte pro Tag',
+                        tooltip: 'Durchschnittliche Anzahl der täglich eintreffenden LKW',
+                        unit: 'LKW/Tag',
+                    },
+                    toursPerDay: {
+                        label: 'Anzahl Rampen / Tore',
+                        tooltip: 'Verfügbare Kapazität an Be- und Entladestationen',
+                        unit: 'Rampen',
+                    },
+                    stopsPerTour: {
+                        label: 'ADR-Fahrzeuge pro Tag (Gefahrgut)',
+                        tooltip: 'Anzahl der Fahrzeuge mit Gefahrgutkennzeichnung',
+                        unit: 'ADR-Fahrzeuge',
+                    },
+                    avgWaitMinutes: {
+                        label: 'Ø Wartezeit pro Stopp',
+                        tooltip: 'Durchschnittliche Wartezeit pro LKW am Terminal',
+                        unit: 'Minuten',
+                    },
+                    demurrageRate: {
+                        label: 'Produktionsausfallkosten',
+                        tooltip: 'Kosten pro Stunde bei Stillstand oder Verzögerung (Branchenüblich: >500 €)',
+                        unit: '€/Stunde',
+                    },
+                    workingDays: {
+                        label: 'Arbeitstage pro Monat',
+                        tooltip: 'Durchschnittliche Arbeitstage pro Monat am Terminal',
+                        unit: 'Tage',
+                    },
+                },
+            },
+            results: {
+                title: 'Ihre Terminal-Kostenanalyse',
+                cards: {
+                    waitingHours: {
+                        label: 'Gesamtwartestunden / Monat',
+                        description: 'Basierend auf {{stops}} LKW-Anläufen pro Monat',
+                        unit: 'Std.',
+                    },
+                    lostTimeCost: {
+                        label: 'Produktionsverlust / Monat',
+                    },
+                    claimable: {
+                        label: 'ADR-Compliance-Risikoexposition / Monat',
+                        descriptionPositive: 'Ungeplante ADR-Verzögerungen erhöhen Vorfallrisiko und Dokumentationsaufwand',
+                        descriptionZero: 'Aktuell keine erhöhte Risikoexposition durch ADR-Wartezeiten',
+                    },
+                    annualLoss: {
+                        label: 'Geschätzter jährlicher Produktionsverlust',
+                        description: 'Davon ADR-Risiko-induziert: {{amount}} / Jahr',
+                    },
+                },
+                form: {
+                    submitButton: 'Chemie-Terminal-Analyse per E-Mail erhalten',
+                    emailNote: 'Wir senden Ihnen die vollständige Analyse als PDF — inklusive ADR-Risikoexposition und Optimierungspotenzial.',
+                },
+            },
+            footer: {
+                description: 'Berechnen Sie Ihre monatlichen Verluste durch LKW-Wartezeiten an Chemie-Terminals — und erfahren Sie, wie KI-gestützte Rampenplanung ADR-Risiken reduziert, Produktionsstopps verhindert und bis zu 30% Terminalkosten einspart.',
+                legalText: 'Diese Berechnung dient nur zur Orientierung und stellt keine Rechts- oder Compliance-Beratung dar. Für verbindliche ADR/GGVSEB-Bewertungen konsultieren Sie bitte einen zertifizierten Gefahrgutbeauftragten.',
+            },
+            pdf: {
+                filename: 'Chemie-Terminal-Analyse',
+                parameterHeader: 'Terminal-Konfiguration',
+                annualClaimable: 'ADR-Risikoexposition (jährlich)',
+                legalTitle: 'Compliance-Grundlage',
+            }
         },
     },
 };

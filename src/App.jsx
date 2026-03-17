@@ -1,7 +1,8 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import Calculator, { DEFAULT_VALUES } from './components/Calculator';
+import Calculator from './components/Calculator';
+import { DEFAULT_VALUES, CHEMICAL_DEFAULT_VALUES } from './constants';
 import Results from './components/Results';
 import Footer from './components/Footer';
 import { calculateDemurrage } from './utils/calculations';
@@ -11,7 +12,24 @@ import { calculateDemurrage } from './utils/calculations';
  * Centered container with balanced two-column grid.
  */
 export default function App() {
-  const [values, setValues] = useState(DEFAULT_VALUES);
+  const [variant, setVariant] = useState(() => {
+    return window.location.pathname.includes('/chemie') ? 'chemical' : 'freight';
+  });
+
+  const [values, setValues] = useState(() => {
+    return window.location.pathname.includes('/chemie') ? CHEMICAL_DEFAULT_VALUES : DEFAULT_VALUES;
+  });
+
+  useEffect(() => {
+    const handlePopState = () => {
+      const isChemical = window.location.pathname.includes('/chemie');
+      setVariant(isChemical ? 'chemical' : 'freight');
+      setValues(isChemical ? CHEMICAL_DEFAULT_VALUES : DEFAULT_VALUES);
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   const handleValueChange = (field, value) => {
     setValues((prev) => ({ ...prev, [field]: value }));
@@ -24,7 +42,7 @@ export default function App() {
       {/* Header + Hero share the gradient background */}
       <div className="hero-gradient">
         <Header />
-        <Hero />
+        <Hero variant={variant} />
       </div>
 
       {/* Calculator Section */}
@@ -34,18 +52,18 @@ export default function App() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-start">
             {/* Left: Calculator form */}
             <div className="animate-slide-in-left relative z-20">
-              <Calculator values={values} onValueChange={handleValueChange} />
+              <Calculator values={values} onValueChange={handleValueChange} variant={variant} />
             </div>
 
             {/* Right: Results */}
             <div className="animate-fade-in-up animation-delay-200">
-              <Results results={results} inputs={values} />
+              <Results results={results} inputs={values} variant={variant} />
             </div>
           </div>
         </div>
       </main>
 
-      <Footer />
+      <Footer variant={variant} />
     </div>
   );
 }

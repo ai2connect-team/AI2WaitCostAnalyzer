@@ -19,8 +19,9 @@ import { formatCurrency, formatNumber } from '../utils/calculations';
  * Results display — light theme with i18n.
  * Includes an email form to send the PDF report to the user.
  */
-export default function Results({ results, inputs }) {
+export default function Results({ results, inputs, variant = 'freight' }) {
     const { t } = useTranslation();
+    const prefix = variant === 'chemical' ? 'chemical.' : '';
 
     // ── Form state ─────────────────────────────────────────────────
     const [name, setName] = useState('');
@@ -70,7 +71,7 @@ export default function Results({ results, inputs }) {
     const cards = [
         {
             icon: <Clock size={22} />,
-            label: t('results.cards.waitingHours.label'),
+            label: t(`${prefix}results.cards.waitingHours.label`),
             value: `${formatNumber(results.totalWaitingHoursPerMonth, 1)} ${t('results.cards.waitingHours.unit')}`,
             description: t('results.cards.waitingHours.description', {
                 stops: formatNumber(results.totalStopsPerMonth),
@@ -80,7 +81,7 @@ export default function Results({ results, inputs }) {
         },
         {
             icon: <TrendingDown size={22} />,
-            label: t('results.cards.lostTimeCost.label'),
+            label: t(`${prefix}results.cards.lostTimeCost.label`),
             value: formatCurrency(results.monthlyCostOfLostTime),
             description: t('results.cards.lostTimeCost.description'),
             variant: 'danger',
@@ -88,22 +89,22 @@ export default function Results({ results, inputs }) {
         },
         {
             icon: <Scale size={22} />,
-            label: t('results.cards.claimable.label'),
-            value: formatCurrency(results.monthlyClaimableDemurrage),
+            label: t(`${prefix}results.cards.claimable.label`),
+            value: variant === 'chemical' ? formatCurrency(results.monthlyClaimableDemurrage) : formatCurrency(results.monthlyClaimableDemurrage),
             description:
                 results.monthlyClaimableDemurrage > 0
-                    ? t('results.cards.claimable.descriptionPositive', {
+                    ? t(`${prefix}results.cards.claimable.descriptionPositive`, {
                         hours: formatNumber(results.claimableHoursPerMonth, 1),
                     })
-                    : t('results.cards.claimable.descriptionZero'),
+                    : t(`${prefix}results.cards.claimable.descriptionZero`),
             variant: 'success',
             delay: 'animation-delay-200',
         },
         {
             icon: <CalendarRange size={22} />,
-            label: t('results.cards.annualLoss.label'),
+            label: t(`${prefix}results.cards.annualLoss.label`),
             value: formatCurrency(results.annualCostOfLostTime),
-            description: t('results.cards.annualLoss.description', {
+            description: t(`${prefix}results.cards.annualLoss.description`, {
                 amount: formatCurrency(results.annualClaimableDemurrage),
             }),
             variant: 'highlight',
@@ -120,10 +121,10 @@ export default function Results({ results, inputs }) {
                 </div>
                 <div>
                     <h3 className="text-sm font-semibold text-surface-800">
-                        {t('results.form.submitButton')}
+                        {t(`${prefix}results.form.submitButton`)}
                     </h3>
                     <p className="text-xs text-surface-500">
-                        {t('results.form.emailNote')}
+                        {t(`${prefix}results.form.emailNote`)}
                     </p>
                 </div>
             </div>
@@ -195,7 +196,7 @@ export default function Results({ results, inputs }) {
                 icon={<Send size={16} />}
                 className="w-full"
             >
-                {loading ? t('results.form.submitting') : t('results.form.submitButton')}
+                {loading ? t('results.form.submitting') : t(`${prefix}results.form.submitButton`)}
             </Button>
 
             {/* Success message */}
@@ -223,7 +224,7 @@ export default function Results({ results, inputs }) {
             {/* Section header */}
             <div>
                 <h2 className="text-xl sm:text-2xl font-bold text-surface-800 mb-1">
-                    {t('results.title')}
+                    {t(`${prefix}results.title`)}
                 </h2>
                 <p className="text-sm sm:text-base text-surface-500">
                     {t('results.subtitle')}
