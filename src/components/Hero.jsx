@@ -3,8 +3,9 @@ import { useTranslation, Trans } from 'react-i18next';
 /**
  * Hero section — centered on blue gradient background with i18n.
  */
-export default function Hero() {
+export default function Hero({ variant = 'freight' }) {
     const { t } = useTranslation();
+    const prefix = variant === 'chemical' ? 'chemical.' : '';
 
     return (
         <section className="pt-12 pb-14 sm:pt-16 sm:pb-20 lg:pt-4 lg:pb-8">
@@ -27,14 +28,14 @@ export default function Hero() {
                 {/* Headline */}
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight mb-6 text-white animate-fade-in-up">
                     <Trans
-                        i18nKey="hero.headline"
+                        i18nKey={`${prefix}hero.headline`}
                         components={{ highlight: <span className="text-cyan-300" /> }}
                     />
                 </h2>
 
                 {/* Subheadline */}
                 <p className="text-base sm:text-lg text-blue-100 max-w-xl mx-auto leading-relaxed opacity-0 animate-fade-in-up animation-delay-100">
-                    {t('hero.subheadline')}
+                    {t(`${prefix}hero.subheadline`)}
                 </p>
             </div>
         </section>
