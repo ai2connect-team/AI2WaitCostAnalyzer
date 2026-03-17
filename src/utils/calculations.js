@@ -65,12 +65,12 @@ export function calculateDemurrage({
 
     return {
         totalStopsPerMonth,
-        totalWaitingHoursPerMonth: Math.round(totalWaitingHoursPerMonth * 10) / 10,
+        totalWaitingHoursPerMonth: Math.round(totalWaitingHoursPerMonth),
         monthlyCostOfLostTime: Math.round(monthlyCostOfLostTime),
         monthlyClaimableDemurrage: Math.round(monthlyClaimableDemurrage),
         annualCostOfLostTime: Math.round(annualCostOfLostTime),
         annualClaimableDemurrage: Math.round(annualClaimableDemurrage),
-        claimableHoursPerMonth: Math.round(claimableHoursPerMonth * 10) / 10,
+        claimableHoursPerMonth: Math.round(claimableHoursPerMonth),
     };
 }
 
@@ -83,8 +83,8 @@ export function formatCurrency(value) {
     return new Intl.NumberFormat('de-DE', {
         style: 'currency',
         currency: 'EUR',
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 0,
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
     }).format(value);
 }
 
